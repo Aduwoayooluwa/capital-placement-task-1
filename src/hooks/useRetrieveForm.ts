@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query"
-import { api, baseURL } from "../api/api"
+import { api, apiVerson, baseURL } from "../api/api"
 
-console.log(baseURL)
-// custom hook to retrieve application form
-//const retriveFormUrl = `${baseURL}/:version/programs/:programId/application-form`
-const dummyUrl = `http://127.0.0.1:4010/api/663.5847423271675/programs/qui/application-form`
 
-const fetchApplicationForm = () => api.get(dummyUrl).then((response) => response.data)
+// custom hook to retrieve application form'
+const programId = Math.floor(Math.random() * 1000000000000)
+
+const retriveFormUrl = `${baseURL}/${apiVerson}/programs/${programId}/application-form`
+
+
+const fetchApplicationForm = () => api.get(retriveFormUrl).then((response) => response.data)
 
 const useRetreiveForm = () => {
 

@@ -7,13 +7,14 @@ import additionIcon from "../../../assets/icons/additionIcon.png"
 
 type Props = {
     placeholder?: string
+    onChange?: () => void
 }
 
-const ChoiceField = ({ placeholder }: Props) => {
+const ChoiceField = ({ placeholder, onChange }: Props) => {
   return (
     <HStack w="full">
         <Image alt="" src={listIcon} />
-        <TextField placeholder={placeholder}/>
+        <TextField onChange={onChange} placeholder={placeholder}/>
         <Image alt="" src={additionIcon} />
     </HStack>
   )

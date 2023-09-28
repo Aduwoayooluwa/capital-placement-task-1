@@ -1,22 +1,17 @@
-import { useState } from 'react';
 import { Switch, Text, HStack } from '@chakra-ui/react';
 
-function ToggleSwitch(): JSX.Element {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-  };
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function ToggleSwitch({ isToggled, onToggle }: any) {
+  // const [isChecked, setIsChecked] = useState<boolean>(false);
   return (
     <HStack>
         <Switch
         colorScheme="teal"
         size="md"
-        isChecked={isChecked}
-        onChange={handleToggle}
+        isChecked={isToggled}
+        onChange={onToggle}
         />
-        <Text textColor="#666666" fontSize={"sm"}>{ isChecked ? "Hide" : "Show" }</Text>
+        <Text textColor="#666666" fontSize={"sm"}>{ isToggled ? "Hide" : "Show" }</Text>
     </HStack>
     
   );

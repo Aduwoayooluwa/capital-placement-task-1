@@ -3,10 +3,32 @@
 import { Box, Divider, Stack, Text } from "@chakra-ui/react"
 import ElementLayer from "../Layout/ElementLayer"
 import FormField from "../components/composite/FormField"
-
+import { useReducer } from "react"
+import { formReducer, initialState } from "../utils/reducers/personalQuestion"
+import PrimaryButton from "../components/ui/buttons/PrimaryButton"
 // type Props = {}
 
+const formFields: Record<string, string> = {
+  phone: "Phone",
+  nationality: "Nationality",
+  currentResidence: "Current Residence",
+  idNumber: "ID Number",
+  dob: "Date of Birth",
+  gender: "Gender"
+}
+
 const PersonalInformation = () => {
+
+  const [state, isCheckdDispatch] = useReducer(formReducer, initialState)
+
+  const [toggleState, toggleDispatch] = useReducer(formReducer, initialState)
+
+  const handleSavePI = () => {
+    const PI = { ...state, ...toggleState };
+
+    localStorage.setItem('PI', JSON.stringify(PI));
+  };
+  
   return (
     <ElementLayer title="Personal Information">
         <Box>
@@ -27,31 +49,31 @@ const PersonalInformation = () => {
             </Stack>
 
             <Divider orientation="horizontal"/>
+            {
+              Object.keys(formFields).map((field) => {
 
-            <FormField label="Phone" checkboxLabel="internal"/>
-
-            <Divider orientation="horizontal"/>
-
-            <FormField label="Nationality" checkboxLabel="internal"/>
+                   return (
+                    <FormField
+                      label={formFields[field]}
+                      checkboxLabel="internal"
+                      isChecked={state[field]}
+                      isToggled={toggleState[field]}
+                      setChecked={() => isCheckdDispatch({ type: 'TOGGLE_CHECKBOX', field: field })}
+                      setIsToggled={() => toggleDispatch({ type: 'TOGGLE_TOGGLE', field: field} )}
+                      key={field}
+                    />
+                   )
+   
+              })
+            }
             
             <Divider orientation="horizontal"/>
 
-            <FormField label="Current Residence" checkboxLabel="internal"/>
-
-            <Divider orientation="horizontal"/>
-
-            <FormField label="ID Number" checkboxLabel="internal"/>
-
-            <Divider orientation="horizontal"/>
-
-            <FormField label="Date Of Birth" checkboxLabel="internal"/>
-
-            <Divider orientation="horizontal"/>
-
-            <FormField label="Gender" checkboxLabel="internal"/>
+            <PrimaryButton onClick={handleSavePI} name="Save Personal Information" />
         </Box>
     </ElementLayer>
   )
 }
+
 
 export default PersonalInformation

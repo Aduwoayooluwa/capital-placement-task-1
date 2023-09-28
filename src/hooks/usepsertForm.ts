@@ -1,17 +1,22 @@
 import { useMutation } from "@tanstack/react-query"
-import { api, baseURL } from "../api/api"
+import { api, apiVerson, baseURL } from "../api/api"
 
-const upsertFormUrl = `${baseURL}/api/upsert`
+const programId = Math.floor(Math.random() * 1000000000000)
+const upsertFormUrl = `${baseURL}/${apiVerson}/programs/${programId}/application-form`
 
-const upsertApplicationForm = () => api.put(upsertFormUrl).then((response) => response.data)
-const useUpsertForm = () => {
 
-    const { data: handleUpsertForm, isLoading, error } = useMutation({
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useUpsertForm = (payload: any) => {
+
+    const { mutate, isLoading, error, isError } = useMutation({
         mutationKey: ["upsert app form"],
-        mutationFn: upsertApplicationForm
+        mutationFn: async () => await api.put(upsertFormUrl, {
+            payload
+        }).then((response) => response.data)
     })
 
-    return { handleUpsertForm, isLoading, error }
+    return { mutate, isLoading, error, isError }
 }
 
 

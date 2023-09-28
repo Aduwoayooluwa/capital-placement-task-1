@@ -33,7 +33,7 @@ const NavStepper = () => {
                 position="relative" // Set the container to a relative position
                 >
                 <Text textColor={"white"}>{"Application Form"}</Text>
-                {/* Triangle */}
+                {/* the rotsated Triangle */}
                 <div
                     style={{
                     content: "",
@@ -45,7 +45,7 @@ const NavStepper = () => {
                     borderTop: "21px solid transparent", // Adjust the size of the triangle
                     borderBottom: "21px solid transparent", // Adjust the size of the triangle
                     borderLeft: "25px solid #00635B",
-                     // Adjust the color and size of the triangle
+                     
                     }}
                 ></div>
             </Stack>

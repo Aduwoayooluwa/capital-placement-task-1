@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const baseURL: string = import.meta.env.VITE_APP_BASE_URL
-
+export const apiVerson = 1
 export const api = axios.create({
     baseURL: baseURL,
 });
