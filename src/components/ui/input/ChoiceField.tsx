@@ -7,7 +7,8 @@ import additionIcon from "../../../assets/icons/additionIcon.png"
 
 type Props = {
     placeholder?: string
-    onChange?: () => void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onChange?: any
 }
 
 const ChoiceField = ({ placeholder, onChange }: Props) => {

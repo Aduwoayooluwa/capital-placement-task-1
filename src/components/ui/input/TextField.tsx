@@ -5,7 +5,8 @@ type Props = {
     name?: string
     placeholder?: string
     title?: string
-    onChange?: () => void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onChange?: any
     value?: string
 }
 

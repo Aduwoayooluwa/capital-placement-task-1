@@ -3,8 +3,9 @@
 import { Box, Divider, Stack, Text } from "@chakra-ui/react"
 import ElementLayer from "../Layout/ElementLayer"
 import FormField from "../components/composite/FormField"
-import React, { useReducer, useState } from "react"
+import  { useReducer } from "react"
 import { formReducer, initialState } from "../utils/reducers/personalQuestion"
+
 // type Props = {}
 
 const formFields: Record<string, string> = {
@@ -18,9 +19,10 @@ const formFields: Record<string, string> = {
 
 const PersonalInformation = () => {
 
-  const [state, dispatch] = useReducer(formReducer, initialState)
+  const [state, isCheckdDispatch] = useReducer(formReducer, initialState)
 
-  const [isCheck, setIsCheck] = useState(false)
+  const [toggleState, toggleDispatch] = useReducer(formReducer, initialState)
+
   
   return (
     <ElementLayer title="Personal Information">
@@ -44,14 +46,15 @@ const PersonalInformation = () => {
             <Divider orientation="horizontal"/>
             {
               Object.keys(formFields).map((field) => {
-                console.log(state[field])
+
                    return (
                     <FormField
                       label={formFields[field]}
                       checkboxLabel="internal"
                       isChecked={state[field]}
-                      setChecked={() => dispatch({ type: 'TOGGLE_CHECKBOX', field: field })}
-                      setIsToggled={() => }
+                      isToggled={toggleState[field]}
+                      setChecked={() => isCheckdDispatch({ type: 'TOGGLE_CHECKBOX', field: field })}
+                      setIsToggled={() => toggleDispatch({ type: 'TOGGLE_TOGGLE', field: field} )}
                       key={field}
                     />
                    )

@@ -1,3 +1,30 @@
+type Action =
+    | { type: 'TOGGLE_CHECKBOX'; field: string }
+    | { type: 'TOGGLE_TOGGLE'; field: string };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const initialState: Record<any, boolean> = {
+    phoneChecked: false,
+    nationalityChecked: false,
+    currentResidenceChecked: false,
+    idNumberChecked: false,
+    dateOfBirthChecked: false,
+    genderChecked: false,
+};
+
+
+export function formReducer(state: typeof initialState, action: Action) {
+    switch (action.type) {
+        case 'TOGGLE_CHECKBOX':
+            return { ...state, [action.field]: !state[action.field] };
+        case 'TOGGLE_TOGGLE':
+            return { ...state, [action.field]: !state[action.field] };
+        default:
+            return state;
+    }
+}
+
+
 import { initialFormData } from '../../api/UpsertFormData';
 
 // Define action types
@@ -13,7 +40,7 @@ type ActionType =
     | { type: 'UPDATE_GENDER'; payload: string };
 
 // Define a reducer function
-export const formReducer = (state: typeof initialFormData, action: ActionType) => {
+export const formReducer1 = (state: typeof initialFormData, action: ActionType) => {
     switch (action.type) {
         case 'UPDATE_FIRST_NAME':
             return {

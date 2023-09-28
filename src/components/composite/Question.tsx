@@ -9,7 +9,7 @@ import CheckboxComponent from '../ui/others/Checkbox';
 import useUpsertForm from '../../hooks/usepsertForm';
 import ToastNotification from '../others/ToastNotification';
 import { initialFormData } from '../../api/UpsertFormData';
-import { initialState } from '../../utils/reducers/personalQuestion';
+import { initialState } from '../../utils/reducers/questions.reducer';
 import { questionReducer } from '../../utils/reducers/questions.reducer';
 
 const data = [
@@ -29,7 +29,7 @@ type QuestionProps = {
 };
 
 const Question = ({ setCreateQuestion }: QuestionProps) => {
-  const { mutate, isLoading, error, isError } = useUpsertForm(initialFormData);
+  const { mutate, isLoading, isError } = useUpsertForm(initialFormData);
   const [state, dispatch] = useReducer(questionReducer, initialState);
 
   const handleSaveQuestion = () => {
@@ -62,7 +62,7 @@ const Question = ({ setCreateQuestion }: QuestionProps) => {
   };
 
   const handleMaxChoices = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'SET_MAX_CHOICES', payload: e.target.value });
+    dispatch({ type: 'SET_MAX_CHOICES', payload: parseInt(e.target.value) });
   };
 
   const [questionType, setQuestionType] = useState<string>('Paragraph');
@@ -79,7 +79,7 @@ const Question = ({ setCreateQuestion }: QuestionProps) => {
     <Stack borderRadius={'20px'} w={'full'} align={'start'}>
       <Box>
         {isError && (
-          <ToastNotification message={error?.response?.data?.title} status={'error'} />
+          <ToastNotification message={"Something went wrong"} status={'error'} />
         )}
       </Box>
       <VStack px={'4'} w="full" alignItems={'start'}>
